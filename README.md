@@ -119,3 +119,4 @@ The hand coordinates are stored in a **mutable ref** instead of React state — 
 ## 📄 License
 
 MIT — free to use and modify.
+
