@@ -1,150 +1,121 @@
-# Cyber-Snake
+# 🖐️ Neural Sculptor — Hand Tracking 3D App
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
+> Control a 3D glass object with just your hand using AI-powered hand tracking and WebGL rendering.
 
-**Cyber-Snake** is a modernized, high-performance reimagining of the classic Snake arcade game, built with a focus on modular design, retro-futuristic aesthetics, and object-oriented principles. Developed by [ClashLex](https://github.com/ClashLex), this project serves as both an engaging game and a reference implementation for state-driven game development.
-
----
-
-## 1. Project Overview
-Cyber-Snake elevates the traditional 2D grid movement mechanics with a "Cyberpunk" inspired visual layer. The project is designed to be lightweight yet extensible, allowing developers to easily swap out rendering engines or input handlers.
-
-### Key Features
-*   **Dynamic Difficulty Scaling:** Snake speed and obstacles evolve as the score increases.
-*   **Modular Rendering:** Decoupled game logic from the drawing layer.
-*   **State Management:** Robust handling of Game Start, Pause, Playing, and Game Over states.
-*   **High-Score Persistence:** Local storage integration to track player progress.
-*   **Responsive Input:** Optimized event listening for zero-latency control.
+![Tech](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)
+![Tech](https://img.shields.io/badge/Three.js-r184-black?style=flat-square&logo=threedotjs)
+![Tech](https://img.shields.io/badge/MediaPipe-0.10-blue?style=flat-square)
+![Tech](https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
 ---
 
-## 2. Architecture
-The system follows a **Model-View-Controller (MVC)** influenced architecture to ensure separation of concerns.
+## ✨ Features
 
-### Component Descriptions
-*   **Game Engine:** The central heartbeat; manages the `requestAnimationFrame` loop and delta-time calculations.
-*   **Grid Manager:** Handles the coordinate system, collision detection (walls/self), and entity placement.
-*   **Entity Controller:** Manages the Snake (linked-list logic for the body) and the Food (randomized spawn logic).
-*   **Renderer:** The visual bridge that translates the logical grid into pixels on the screen.
-*   **Input Handler:** A singleton that captures keyboard/touch events and translates them into movement vectors.
-
----
-
-## 3. Architecture Diagram
-The following Mermaid diagram illustrates the interaction between the core components:
-
-```mermaid
-graph TD
-    A[Game Loop/Engine] -->|Updates| B(State Manager)
-    B -->|Current State| C{Game Status}
-    
-    C -->|Playing| D[Physics/Collision Engine]
-    C -->|Playing| E[Input Handler]
-    
-    D -->|Coordinate Update| F[Snake Entity]
-    D -->|Coordinate Update| G[Food Entity]
-    
-    F -->|Position Data| H[Canvas Renderer]
-    G -->|Position Data| H[Canvas Renderer]
-    
-    E -->|Direction Vector| F
-    
-    H -->|Local Storage| I[(High Scores)]
-    D -->|Collision Event| B
-```
+- **Real-time Hand Tracking** — MediaPipe detects your index finger at 60fps via webcam
+- **3D Glass Blob** — A torus knot with physically-based glass/refraction material that follows your hand
+- **GPU Accelerated AI** — MediaPipe runs on GPU delegate for near-zero latency
+- **Skiper UI Overlays** — Glassmorphism HUD panel with live X/Y coordinate tracking
+- **Animated Loading Screen** — Spinning orb with progress bar while the neural engine boots
+- **Hand Detection Status** — Real-time green/red indicator showing tracking state
+- **Smooth Lerp Movement** — Buttery 60fps interpolation between hand positions
+- **Dark Cinematic UI** — Vignette, gradient text, and ClashLex branding
 
 ---
 
-## 4. Installation
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| UI Framework | React 19 + Vite |
+| 3D Rendering | React Three Fiber + Three.js |
+| 3D Helpers | @react-three/drei |
+| AI / Vision | MediaPipe Hand Landmarker |
+| Styling | Inline CSS + CSS Variables |
+| Deployment | GitHub Pages + GitHub Actions |
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-*   A modern web browser (Chrome, Firefox, Safari, Edge).
-*   (Optional) [Node.js](https://nodejs.org/) if you wish to run a local development server.
+- Node.js 18+
+- A webcam
+- A modern browser (Chrome recommended for GPU support)
 
-### Setup
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/ClashLex/Cyber-snake.git
-    cd Cyber-snake
-    ```
+### Installation
 
-2.  **Open locally:**
-    Simply open the `index.html` file in your browser:
-    ```bash
-    open index.html
-    ```
+```bash
+git clone https://github.com/ClashLex/hand-tracking-app.git
+cd hand-tracking-app
+npm install
+npm run dev
+```
 
-3.  **Alternative (NPM):**
-    If you have `http-server` installed:
-    ```bash
-    npx http-server .
-    ```
+Then open `http://localhost:5173` and allow camera access.
 
 ---
 
-## 5. Usage
+## 🎮 How to Use
 
-### Controls
-| Key | Action |
-|-----|--------|
-| `W` / `Arrow Up` | Move Up |
-| `S` / `Arrow Down` | Move Down |
-| `A` / `Arrow Left` | Move Left |
-| `D` / `Arrow Right` | Move Right |
-| `Space` | Pause / Resume |
-| `R` | Reset Game |
+1. Open the app in your browser
+2. Allow webcam permission when prompted
+3. Wait for **"Initializing GPU..."** to complete
+4. Hold your hand in front of the camera
+5. Move your **index finger** to control the 3D glass blob
+6. Watch the HUD panel track your coordinates in real time
 
-### API / Customization
-You can modify the game behavior by adjusting the constants in the configuration file (`config.js` or top of `script.js`):
+---
 
-```javascript
-// Example Configuration
-const SETTINGS = {
-    GRID_SIZE: 20,
-    INITIAL_SPEED: 100, // ms per tick
-    SPEED_INCREMENT: 0.95, // multiplier per food eaten
-    COLORS: {
-        SNAKE_HEAD: '#00ff41',
-        SNAKE_BODY: '#008f11',
-        FOOD: '#ff003c'
-    }
-};
+## 📁 Project Structure
+
+```
+hand-tracking-app/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── App.jsx          # Main app — 3D scene + AI logic + UI overlays
+│   ├── main.jsx         # React entry point
+│   └── index.css        # Global styles
+├── index.html
+├── vite.config.js
+└── package.json
 ```
 
 ---
 
-## 6. Configuration
-The game supports environment-specific tuning via global variables:
+## 🧠 How It Works
 
-| Variable | Type | Default | Description |
-|----------|------|---------|-------------|
-| `CANVAS_ID` | String | `'gameCanvas'` | The ID of the HTML5 canvas element. |
-| `DEBUG_MODE` | Boolean | `false` | Enables hit-box outlines and coordinate logging. |
-| `UPGRADE_CHANCE` | Float | `0.1` | Probability of "Power-Up" food spawning. |
+```
+Webcam Feed
+    ↓
+MediaPipe Hand Landmarker (GPU)
+    ↓
+Index Finger Tip (Landmark #8) coordinates
+    ↓
+Mutable React Ref (bypasses re-renders)
+    ↓
+React Three Fiber useFrame (60fps)
+    ↓
+Lerp → Torus Knot Position Update
+```
 
----
-
-## 7. Contributing
-Contributions are what make the open-source community an amazing place to learn, inspire, and create.
-
-1.  **Fork** the Project.
-2.  **Create** your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3.  **Commit** your Changes (`git commit -m 'Add some AmazingFeature'`).
-4.  **Push** to the Branch (`git push origin feature/AmazingFeature`).
-5.  **Open** a Pull Request.
-
-**Checklist:**
-*   Follow the existing code style (ES6+).
-*   Document any new functions or classes.
-*   Ensure the game remains playable at 60FPS.
+The hand coordinates are stored in a **mutable ref** instead of React state — this prevents 60 re-renders per second and keeps the 3D animation buttery smooth.
 
 ---
 
-## 8. License
-Distributed under the **MIT License**. See `LICENSE` for more information.
+## 🌐 Live Demo
+
+**[https://clashlex.github.io/hand-tracking-app](https://clashlex.github.io/hand-tracking-app)**
 
 ---
 
-**AutoDoc AI Generated** - *Standardizing Excellence in Documentation*
+## 👤 Author
+
+**ClashLex** — [github.com/ClashLex](https://github.com/ClashLex)
+
+---
+
+## 📄 License
+
+MIT — free to use and modify.
