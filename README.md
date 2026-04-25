@@ -2,6 +2,7 @@
 
 > Control a 3D glass object with just your hand using AI-powered hand tracking and WebGL rendering.
 
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-CyberSlide-00f5d4?style=for-the-badge&logo=github)](https://clashlex.github.io/hand-tracking-app)
 ![Tech](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)
 ![Tech](https://img.shields.io/badge/Three.js-r184-black?style=flat-square&logo=threedotjs)
 ![Tech](https://img.shields.io/badge/MediaPipe-0.10-blue?style=flat-square)
@@ -101,12 +102,6 @@ Lerp → Torus Knot Position Update
 ```
 
 The hand coordinates are stored in a **mutable ref** instead of React state — this prevents 60 re-renders per second and keeps the 3D animation buttery smooth.
-
----
-
-## 🌐 Live Demo
-
-**[https://clashlex.github.io/hand-tracking-app](https://clashlex.github.io/hand-tracking-app)**
 
 ---
 
