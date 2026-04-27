@@ -2,7 +2,7 @@
 
 > Control a 3D glass object with just your hand using AI-powered hand tracking and WebGL rendering.
 
-[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-CyberSlide-00f5d4?style=for-the-badge&logo=github)](https://clashlex.github.io/hand-tracking-app)
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-HAND_TRACKING_APP-00f5?style=for-the-badge&logo=github)](https://clashlex.github.io/hand-tracking-app)
 ![Tech](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)
 ![Tech](https://img.shields.io/badge/Three.js-r184-black?style=flat-square&logo=threedotjs)
 ![Tech](https://img.shields.io/badge/MediaPipe-0.10-blue?style=flat-square)
